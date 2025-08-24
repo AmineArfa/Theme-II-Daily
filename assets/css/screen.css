@@ -1134,7 +1134,6 @@ body:has(.gh-live-ticker) .gh-cover {
     .gh-topic-grid .gh-card:not(.featured).large .gh-card-link {
         flex-direction: column;
     }
-}
 
     .gh-topic-grid .gh-card.featured.large .gh-card-link {
         min-height: 480px;
