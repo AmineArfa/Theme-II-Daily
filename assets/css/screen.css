@@ -602,7 +602,16 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     display: flex;
     flex-direction: column;
     max-width: 560px;
+    margin-bottom: 20px;
+}
+
+/* Reduced spacing for topic sections */
+.gh-topic.gh-topic-grid {
     margin-bottom: 40px;
+}
+
+.gh-topic.gh-topic-grid:first-of-type {
+    margin-top: 10px;
 }
 
 .gh-pagehead-title {

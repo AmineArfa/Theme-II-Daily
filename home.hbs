@@ -4,15 +4,7 @@
     <div class="gh-inner">
         
 
-        <section class="gh-topic gh-topic-grid">
-            <h2 class="gh-topic-name">
-                {{#match pagination.pages ">" 1}}
-                    <a href="{{@site.url}}/page/2">Latest</a>
-                {{else}}
-                    Latest
-                {{/match}}
-            </h2>
-
+        <section class="gh-topic gh-topic-grid" style="margin-top: 20px;">
             <div class="gh-topic-content">
                 {{#get "posts" filter="tag:-live" limit="7"}}
                     {{#foreach posts}}
@@ -67,5 +59,25 @@
                 {{/get}}
             {{/match}}
         {{/if}}
+
+        <section class="gh-topic gh-topic-grid">
+            <h2 class="gh-topic-name">AI daily update</h2>
+
+            <div class="gh-topic-content">
+                {{#get "posts" filter="tag:live" limit="7"}}
+                    {{#foreach posts}}
+                        {{> "loop-grid"}}
+                    {{/foreach}}
+                {{/get}}
+            </div>
+
+            <footer class="gh-topic-footer">
+                {{#get "posts" filter="tag:live" include="count.posts"}}
+                    {{#if posts}}
+                        <a class="gh-topic-link" href="{{@site.url}}/tag/live/">Show more {{> "icons/arrow"}}</a>
+                    {{/if}}
+                {{/get}}
+            </footer>
+        </section>
     </div>
 </main>

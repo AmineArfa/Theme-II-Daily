@@ -97,12 +97,12 @@
 
         {{#unless @member}}
         {{#is "home, index"}}
-        <aside class="gh-live-sidebar">
+        <aside class="gh-live-sidebar" style="margin-top: 0; padding-top: 0;">
             <div class="gh-live-header">
-                <h3 class="gh-live-title">Latest</h3>
+                <h3 class="gh-live-title">Articles</h3>
             </div>
             <div class="gh-live-content">
-                {{#get "posts" filter="tag:live" limit="8" include="authors"}}
+                {{#get "posts" limit="5" include="authors"}}
                     {{#foreach posts}}
                         {{> "loop-minimal-live"}}
                     {{/foreach}}
@@ -111,6 +111,21 @@
         </aside>
         {{/is}}
         {{/unless}}
+
+        {{#is "home, index"}}
+        <aside class="gh-ai-update gh-sidebar">
+            <div class="gh-ai-update-header gh-live-header">
+                <h3 class="gh-ai-update-title gh-live-title">AI Daily Update</h3>
+            </div>
+            <div class="gh-ai-update-content gh-live-content">
+                {{#get "posts" filter="tag:live" limit="5" include="authors"}}
+                    {{#foreach posts}}
+                        {{> "loop-minimal-live"}}
+                    {{/foreach}}
+                {{/get}}
+            </div>
+        </aside>
+        {{/is}}
     </div>
 
     <footer class="gh-foot gh-outer">
