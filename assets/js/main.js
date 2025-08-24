@@ -50,9 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear existing content
         track.innerHTML = '';
 
-        // Create a continuous string of all breaking news items with proper spacing
+        // Create a continuous string of all breaking news items with proper spacing and links
         const newsItems = posts.map(post => 
-            `<span class="gh-live-ticker-time">${post.time}</span> ${post.title}`
+            `<a href="${post.url}" class="gh-live-ticker-link"><span class="gh-live-ticker-time">${post.time}</span> ${post.title}</a>`
         ).join(' • ');
 
         // Create the scrolling item with seamless looping

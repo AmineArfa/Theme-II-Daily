@@ -805,11 +805,6 @@ body.is-head-dark .gh-live-ticker {
     padding-left: 100%;
 }
 
-.gh-live-ticker-item:hover {
-    animation-play-state: paused;
-    color: var(--ghost-accent-color);
-}
-
 @keyframes scrollLeft {
     0% {
         transform: translateX(0);
@@ -844,12 +839,22 @@ body.is-head-dark .gh-live-ticker {
 }
 
 .gh-live-ticker-headline {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 500;
     line-height: 1.2;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.gh-live-ticker-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.gh-live-ticker-link:hover {
+    color: var(--ghost-accent-color);
 }
 
 body.is-head-dark .gh-live-ticker-item {
@@ -878,7 +883,7 @@ body.is-head-dark .gh-live-ticker-time {
     }
 
     .gh-live-ticker-headline {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .gh-live-news-link {
