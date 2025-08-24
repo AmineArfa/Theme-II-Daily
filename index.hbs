@@ -10,15 +10,17 @@
         <div class="gh-topic gh-topic-grid">
             <div class="gh-topic-content gh-feed">
                 {{#match pagination.page 2}}
-                    {{#get "posts" include="authors" limit=@config.posts_per_page as |recent|}}
+                    {{#get "posts" include="authors" filter="tag:-live" limit=@config.posts_per_page as |recent|}}
                         {{#foreach recent}}
                             {{> "loop-grid"}}
                         {{/foreach}}
                     {{/get}}
                 {{/match}}
-                {{#foreach posts}}
-                    {{> "loop-grid" has_large_post=false}}
-                {{/foreach}}
+                {{#get "posts" filter="tag:-live" include="authors" limit=@config.posts_per_page as |filtered|}}
+                    {{#foreach filtered}}
+                        {{> "loop-grid" has_large_post=false}}
+                    {{/foreach}}
+                {{/get}}
             </div>
         </div>
 

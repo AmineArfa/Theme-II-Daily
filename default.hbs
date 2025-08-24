@@ -10,7 +10,7 @@
     {{ghost_head}}
 </head>
 
-<body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}{{#is "tag"}}{{#if tag.feature_image}} is-head-transparent{{/if}}{{/is}}{{#match @custom.header_style "Accent color"}} is-head-brand{{/match}}{{#match @custom.header_style "Dark"}} is-head-dark{{/match}}">
+<body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}{{#is "tag"}}{{#if tag.feature_image}} is-head-transparent{{/if}}{{/is}}{{#match @custom.header_style "Accent color"}} is-head-brand{{/match}}{{#match @custom.header_style "Dark"}} is-head-dark{{/match}}{{#is "home, index"}} has-live-sidebar{{/is}}">
 <div class="gh-site">
 
     <header id="gh-head" class="gh-head gh-outer">
@@ -67,7 +67,28 @@
         </div>
     </header>
 
-    {{{body}}}
+    <div class="gh-main-container">
+        <div class="gh-content-wrapper">
+            {{{body}}}
+        </div>
+        
+        {{#unless @member}}
+        {{#is "home, index"}}
+        <aside class="gh-live-sidebar">
+            <div class="gh-live-header">
+                <h3 class="gh-live-title">Latest</h3>
+            </div>
+            <div class="gh-live-content">
+                {{#get "posts" filter="tag:live" limit="8" include="authors"}}
+                    {{#foreach posts}}
+                        {{> "loop-minimal-live"}}
+                    {{/foreach}}
+                {{/get}}
+            </div>
+        </aside>
+        {{/is}}
+        {{/unless}}
+    </div>
 
     <footer class="gh-foot gh-outer">
         <div class="gh-foot-inner gh-inner">

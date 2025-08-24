@@ -1,0 +1,12 @@
+
+<article class="gh-live-item {{post_class}}">
+    <a class="gh-live-link" href="{{url}}">
+        <div class="gh-live-meta">
+            <time class="gh-live-time" datetime="{{date format="YYYY-MM-DD"}}">{{date format="h:mm A"}}</time>
+        </div>
+        <h4 class="gh-live-item-title">{{title}}</h4>
+        {{#if excerpt}}
+            <p class="gh-live-excerpt">{{excerpt words="15"}}</p>
+        {{/if}}
+    </a>
+</article>
