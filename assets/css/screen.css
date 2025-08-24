@@ -885,17 +885,17 @@ body.is-head-dark .gh-live-ticker-time {
         padding: 0 16px;
         height: 40px;
     }
-    
+
     .gh-live-badge {
         font-size: 1rem;
         padding: 4px 8px;
         margin-right: 12px;
     }
-    
+
     .gh-live-ticker-time {
         font-size: 1rem;
     }
-    
+
     .gh-live-ticker-headline {
         font-size: 1.2rem;
     }
@@ -953,7 +953,7 @@ body:has(.gh-live-ticker) .gh-cover {
         --professional-spacing: 1.6rem;
         --reading-line-height: 1.6;
     }
-    
+
     body {
         font-size: 1.6rem;
     }
@@ -1126,19 +1126,30 @@ body:has(.gh-live-ticker) .gh-cover {
 }
 
 .gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-title {
-    font-size: 1.4rem;
-    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 400;
     line-height: 1.3;
     margin-bottom: 4px;
+    color: var(--color-secondary-text);
 }
 
 .gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-excerpt {
-    display: none;
+    display: block;
+    font-size: 1.1rem;
+    color: var(--color-secondary-text);
+    opacity: 0.8;
+    margin-top: 4px;
+    line-height: 1.4;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
 }
 
 .gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-footer {
-    margin-top: 0;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    margin-top: 6px;
+    opacity: 0.7;
 }
 
 @media (max-width: 767px) {
@@ -1146,11 +1157,11 @@ body:has(.gh-live-ticker) .gh-cover {
         width: 50px;
         height: 50px;
     }
-    
+
     .gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-title {
         font-size: 1.3rem;
     }
-    
+
     .gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-link {
         padding: 10px 12px;
         gap: 12px;
@@ -1256,14 +1267,14 @@ body:has(.gh-live-ticker) .gh-cover {
         flex-direction: column;
         gap: 24px;
     }
-    
+
     .gh-live-sidebar {
         width: 100%;
         position: static;
         max-height: none;
         order: -1;
     }
-    
+
     .gh-topic-grid .gh-topic-content {
         grid-template-columns: 1fr;
     }
