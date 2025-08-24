@@ -721,7 +721,170 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     margin-top: 64px;
 }
 
+/* Live Carousel Styles */
+.gh-live-carousel {
+    margin-bottom: 80px;
+    border: 1px solid var(--color-light-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-white);
+}
+
+.gh-live-carousel-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    background: var(--color-lighter-gray);
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.gh-live-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    background: #dc2626;
+    color: var(--color-white);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    position: relative;
+}
+
+.gh-live-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--color-white);
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.gh-live-carousel-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-primary-text);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+.gh-live-carousel-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.gh-live-carousel-track {
+    display: flex;
+    animation: scroll 60s linear infinite;
+    will-change: transform;
+}
+
+.gh-live-carousel-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.gh-live-carousel-item {
+    flex: 0 0 auto;
+    min-width: 400px;
+    border-right: 1px solid var(--color-light-gray);
+}
+
+.gh-live-carousel-item:last-child {
+    border-right: none;
+}
+
+.gh-live-carousel-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.15s ease;
+    height: 100%;
+}
+
+.gh-live-carousel-link:hover {
+    background-color: var(--color-lighter-gray);
+}
+
+.gh-live-carousel-time {
+    flex-shrink: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.gh-live-carousel-headline {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+    color: var(--color-primary-text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 /* Media queries */
+
+@media (max-width: 767px) {
+    .gh-live-carousel {
+        margin-bottom: 48px;
+    }
+
+    .gh-live-carousel-header {
+        padding: 12px 16px;
+        gap: 12px;
+    }
+
+    .gh-live-carousel-title {
+        font-size: 1.6rem;
+    }
+
+    .gh-live-carousel-item {
+        min-width: 280px;
+    }
+
+    .gh-live-carousel-link {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .gh-live-carousel-headline {
+        font-size: 1.4rem;
+    }
+
+    .gh-live-carousel-time {
+        font-size: 1.2rem;
+    }
+}
 
 @media (max-width: 767px) {
     .gh-main {

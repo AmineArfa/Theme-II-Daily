@@ -2,6 +2,29 @@
 
 <main class="gh-main gh-outer">
     <div class="gh-inner">
+        {{#get "posts" filter="tag:live" limit="10"}}
+            {{#if posts}}
+                <section class="gh-live-carousel">
+                    <div class="gh-live-carousel-header">
+                        <span class="gh-live-badge">LIVE</span>
+                        <h2 class="gh-live-carousel-title">Breaking News</h2>
+                    </div>
+                    <div class="gh-live-carousel-wrapper">
+                        <div class="gh-live-carousel-track" id="liveCarousel">
+                            {{#foreach posts}}
+                                <article class="gh-live-carousel-item">
+                                    <a href="{{url}}" class="gh-live-carousel-link">
+                                        <time class="gh-live-carousel-time">{{date format="HH:mm"}}</time>
+                                        <h3 class="gh-live-carousel-headline">{{title}}</h3>
+                                    </a>
+                                </article>
+                            {{/foreach}}
+                        </div>
+                    </div>
+                </section>
+            {{/if}}
+        {{/get}}
+
         <section class="gh-topic gh-topic-grid">
             <h2 class="gh-topic-name">
                 {{#match pagination.pages ">" 1}}
