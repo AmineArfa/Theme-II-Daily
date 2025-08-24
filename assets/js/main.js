@@ -4,29 +4,35 @@
 
 // Live ticker functionality
 (function() {
-    const ticker = document.getElementById('liveTickerTrack');
-    if (!ticker) return;
-    
-    // Clone items for seamless scrolling
-    const items = Array.from(ticker.children);
-    items.forEach(item => {
-        const clone = item.cloneNode(true);
-        ticker.appendChild(clone);
-    });
-    
-    // Pause animation on hover
-    ticker.addEventListener('mouseenter', function() {
-        this.style.animationPlayState = 'paused';
-    });
-    
-    ticker.addEventListener('mouseleave', function() {
-        this.style.animationPlayState = 'running';
-    });
-    
-    // Smooth scroll reset when animation completes
-    ticker.addEventListener('animationiteration', function() {
-        this.style.transform = 'translateX(100%)';
-    });
+    const tickerTrack = document.getElementById('liveTickerTrack');
+    const ticker = document.getElementById('liveTicker');
+    if (!tickerTrack) return;
+
+    const items = tickerTrack.querySelectorAll('.gh-live-ticker-item');
+    if (items.length <= 1) return;
+
+    let currentItem = 0;
+    let tickerInterval;
+
+    const cycleItems = () => {
+        items[currentItem].classList.remove('is-active');
+        currentItem = (currentItem + 1) % items.length;
+        items[currentItem].classList.add('is-active');
+    };
+
+    const startTicker = () => {
+        // Cycle every 5 seconds
+        tickerInterval = setInterval(cycleItems, 5000);
+    };
+
+    const stopTicker = () => {
+        clearInterval(tickerInterval);
+    };
+
+    ticker.addEventListener('mouseenter', stopTicker);
+    ticker.addEventListener('mouseleave', startTicker);
+
+    startTicker();
 })();
 
 (function () {
