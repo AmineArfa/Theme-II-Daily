@@ -50,15 +50,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear existing content
         track.innerHTML = '';
 
-        // Create a continuous string of all breaking news items
+        // Create a continuous string of all breaking news items with proper spacing
         const newsItems = posts.map(post => 
             `<span class="gh-live-ticker-time">${post.time}</span> ${post.title}`
-        ).join(' • • • ');
+        ).join(' • ');
 
-        // Create the scrolling item
+        // Create the scrolling item with seamless looping
         const item = document.createElement('div');
         item.className = 'gh-live-ticker-item';
-        item.innerHTML = newsItems + ' • • • ' + newsItems; // Duplicate for seamless loop
+        // Create seamless loop by duplicating content
+        item.innerHTML = newsItems + ' • ' + newsItems;
 
         track.appendChild(item);
     }
