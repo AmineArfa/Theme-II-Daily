@@ -67,9 +67,9 @@
         </div>
     </header>
 
-    {{#get "posts" filter="tag:live" limit="8"}}
+    {{#get "posts" filter="tag:live" limit="5"}}
         {{#if posts}}
-            <div class="gh-live-ticker" id="liveTicker">
+            <div class="gh-live-ticker">
                 <div class="gh-live-ticker-container">
                     <div class="gh-live-badge">
                         <span class="gh-live-dot"></span>
@@ -94,7 +94,7 @@
         <div class="gh-content-wrapper">
             {{{body}}}
         </div>
-        
+
         {{#unless @member}}
         {{#is "home, index"}}
         <aside class="gh-live-sidebar">

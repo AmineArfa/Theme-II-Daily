@@ -725,9 +725,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 .gh-live-ticker {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     background: #f8f8f8;
     border-bottom: 1px solid #e5e5e5;
+    font-family: var(--font-sans);
 }
 
 body.is-head-dark .gh-live-ticker {
@@ -788,6 +789,73 @@ body.is-head-dark .gh-live-ticker {
 .gh-live-ticker-item {
     display: flex;
     align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease-in-out;
+    text-decoration: none;
+    color: inherit;
+    gap: 12px;
+}
+
+.gh-live-ticker-item.is-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gh-live-ticker-item:hover {
+    color: var(--ghost-accent-color);
+}
+
+.gh-live-ticker-time {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ghost-accent-color);
+    flex-shrink: 0;
+}
+
+.gh-live-ticker-headline {
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+body.is-head-dark .gh-live-ticker-item {
+    color: #fff;
+}
+
+body.is-head-dark .gh-live-ticker-time {
+    color: var(--ghost-accent-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .gh-live-ticker-container {
+        padding: 0 16px;
+        height: 40px;
+    }
+    
+    .gh-live-badge {
+        font-size: 1rem;
+        padding: 4px 8px;
+        margin-right: 12px;
+    }
+    
+    .gh-live-ticker-time {
+        font-size: 1rem;
+    }
+    
+    .gh-live-ticker-headline {
+        font-size: 1.2rem;
+    }
+}
     gap: 12px;
     position: absolute;
     inset: 0;
