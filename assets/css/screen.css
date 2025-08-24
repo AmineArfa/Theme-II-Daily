@@ -895,8 +895,12 @@ body.is-head-dark .gh-live-ticker-time {
     }
 
     .gh-live-ticker-headline {
-        font-size: 1rem !important;
+        font-size: 1.1rem !important;
         font-weight: 600 !important;
+        font-family: var(--font-sans) !important;
+        display: inline !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .gh-live-news-link {
@@ -940,8 +944,12 @@ body:has(.gh-live-ticker) .gh-cover {
     }
 
     .gh-live-ticker-headline {
-        font-size: 1rem !important;
+        font-size: 1.1rem !important;
         font-weight: 600 !important;
+        font-family: var(--font-sans) !important;
+        display: inline !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .gh-live-ticker-item {

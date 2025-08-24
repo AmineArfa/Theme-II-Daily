@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return Array.from(document.querySelectorAll('.gh-live-ticker-item')).map(item => {
             const time = item.querySelector('.gh-live-ticker-time');
             const title = item.querySelector('.gh-live-ticker-headline');
-
+            const link = item.querySelector('.gh-live-ticker-link');
             return {
                 title: title ? title.textContent : '',
                 time: time ? time.textContent : new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
-                url: '#',
+                url: link ? link.href : '/',
                 excerpt: ''
             };
         });
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Create a continuous string of all breaking news items with proper spacing and links
         const newsItems = posts.map(post => 
-            `<a href="${post.url}" class="gh-live-ticker-link"><span class="gh-live-ticker-time">${post.time}</span> ${post.title}</a>`
+            `<a href="${post.url}" class="gh-live-ticker-link"><span class="gh-live-ticker-time">${post.time}</span> <h3 class="gh-live-ticker-headline">${post.title}</h3></a>`
         ).join(' • ');
 
         // Create the scrolling item with seamless looping
