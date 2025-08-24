@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function fetchLatestPosts() {
         try {
             // Fetch all recent posts (not just those with "Live" tag)
-            const response = await fetch('/ghost/api/v3/content/posts/?key=' + (window.ghostAPIKey || '') + '&limit=10&fields=title,published_at,url,excerpt&order=published_at%20desc');
+            const response = await fetch('/ghost/api/v3/content/posts/?key=' + (window.ghostAPIKey || '') + '&limit=20&fields=title,published_at,url,excerpt&order=published_at%20desc');
             const data = await response.json();
 
             if (data.posts && data.posts.length > 0) {
