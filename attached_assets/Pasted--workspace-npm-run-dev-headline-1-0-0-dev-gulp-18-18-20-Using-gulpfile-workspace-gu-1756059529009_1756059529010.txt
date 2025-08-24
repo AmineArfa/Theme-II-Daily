@@ -1,0 +1,76 @@
+~/workspace$ npm run dev
+
+> headline@1.0.0 dev
+> gulp
+
+[18:18:20] Using gulpfile ~/workspace/gulpfile.js
+[18:18:20] Starting 'default'...
+[18:18:20] Starting 'css'...
+[18:18:21] Finished 'css' after 518 ms
+[18:18:21] Starting 'js'...
+[18:18:22] Finished 'js' after 1.26 s
+[18:18:22] Starting 'serve'...
+[18:18:22] Finished 'serve' after 3.05 ms
+
+... Uhoh. Got error listen EADDRINUSE: address already in use :::35729 ...
+Error: listen EADDRINUSE: address already in use :::35729
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at Server.listen (/home/runner/workspace/node_modules/tiny-lr/src/server.js:264:19)
+    at exports.listen (/home/runner/workspace/node_modules/gulp-livereload/index.js:97:18)
+    at serve (/home/runner/workspace/gulpfile.js:20:16)
+    at bound (node:domain:433:15)
+    at runBound (node:domain:444:12)
+    at asyncRunner (/home/runner/workspace/node_modules/async-done/index.js:52:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+
+You already have a server listening on 35729
+You should stop it and try again.
+
+[18:18:22] Starting 'hbsWatcher'...
+[18:18:22] Starting 'cssWatcher'...
+[18:18:22] Starting 'jsWatcher'...
+[18:18:23] Starting 'css'...
+[18:18:23] Starting 'js'...
+[18:18:23] Starting 'hbs'...
+[18:18:23] /home/runner/workspace/author.hbs reloaded.
+[18:18:23] /home/runner/workspace/custom-full-feature-image.hbs reloaded.
+[18:18:23] /home/runner/workspace/custom-wide-feature-image.hbs reloaded.
+[18:18:23] /home/runner/workspace/default.hbs reloaded.
+[18:18:23] /home/runner/workspace/home.hbs reloaded.
+[18:18:23] /home/runner/workspace/index.hbs reloaded.
+[18:18:23] /home/runner/workspace/page.hbs reloaded.
+[18:18:23] /home/runner/workspace/post.hbs reloaded.
+[18:18:23] /home/runner/workspace/assets/built/main.min.js reloaded.
+[18:18:23] Finished 'js' after 834 ms
+[18:18:23] /home/runner/workspace/tag.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/comments.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/feature-image.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/loop-grid.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/loop-minimal-live.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/loop-minimal.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/post-meta.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/pswp.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/related-posts.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/topic-grid.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/topic-minimal.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/arrow.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/avatar.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/bluesky.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/email.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/facebook.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/instagram.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/linkedin.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/mastodon.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/search.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/threads.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/tiktok.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/twitter.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/website.hbs reloaded.
+[18:18:23] /home/runner/workspace/partials/icons/youtube.hbs reloaded.
+[18:18:24] /home/runner/workspace/assets/built/screen.css reloaded.
+[18:18:24] /home/runner/workspace/assets/built/screen.css.map reloaded.
+[18:18:24] Finished 'css' after 1.17 s
+[18:18:24] Finished 'hbs' after 1.7 s
+  
