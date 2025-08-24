@@ -2,28 +2,30 @@
     pagination(true);
 })();
 
-// Live carousel functionality
+// Live ticker functionality
 (function() {
-    const carousel = document.getElementById('liveCarousel');
-    if (!carousel) return;
+    const ticker = document.getElementById('liveTickerTrack');
+    if (!ticker) return;
     
-    // Clone items for seamless loop
-    const items = carousel.children;
-    const itemsArray = Array.from(items);
-    
-    // Clone all items and append to create seamless loop
-    itemsArray.forEach(item => {
+    // Clone items for seamless scrolling
+    const items = Array.from(ticker.children);
+    items.forEach(item => {
         const clone = item.cloneNode(true);
-        carousel.appendChild(clone);
+        ticker.appendChild(clone);
     });
     
-    // Pause on hover, resume on mouse leave
-    carousel.addEventListener('mouseenter', function() {
+    // Pause animation on hover
+    ticker.addEventListener('mouseenter', function() {
         this.style.animationPlayState = 'paused';
     });
     
-    carousel.addEventListener('mouseleave', function() {
+    ticker.addEventListener('mouseleave', function() {
         this.style.animationPlayState = 'running';
+    });
+    
+    // Smooth scroll reset when animation completes
+    ticker.addEventListener('animationiteration', function() {
+        this.style.transform = 'translateX(100%)';
     });
 })();
 
