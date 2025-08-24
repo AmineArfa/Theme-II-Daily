@@ -856,42 +856,6 @@ body.is-head-dark .gh-live-ticker-time {
         font-size: 1.2rem;
     }
 }
-    gap: 12px;
-    position: absolute;
-    inset: 0;
-    white-space: nowrap;
-    text-decoration: none;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s;
-    visibility: hidden;
-}
-
-.gh-live-ticker-item.is-active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.gh-live-ticker-time {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #888;
-}
-
-body.is-head-dark .gh-live-ticker-time {
-    color: #999;
-}
-
-.gh-live-ticker-headline {
-    font-size: 1.3rem;
-    font-weight: 500;
-    color: var(--color-primary-text);
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-body.is-head-dark .gh-live-ticker-headline {
-    color: #eee;
-}
 
 /* Adjust main content to account for sticky ticker */
 body:has(.gh-live-ticker) .gh-main {
