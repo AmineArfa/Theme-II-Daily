@@ -794,31 +794,49 @@ body.is-head-dark .gh-live-ticker {
 .gh-live-ticker-track {
     position: relative;
     height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .gh-live-ticker-item {
     display: flex;
     align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.5s ease-in-out;
-    text-decoration: none;
+    white-space: nowrap;
+    animation: scrollLeft 30s linear infinite;
     color: inherit;
     gap: 12px;
-}
-
-.gh-live-ticker-item.is-active {
-    opacity: 1;
-    transform: translateY(0);
+    padding-right: 100px;
 }
 
 .gh-live-ticker-item:hover {
     color: var(--ghost-accent-color);
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.gh-live-news-btn {
+    background: var(--ghost-accent-color);
+    color: var(--color-white);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 16px;
+}
+
+.gh-live-news-btn:hover {
+    opacity: 0.9;
 }
 
 .gh-live-ticker-time {
@@ -864,6 +882,12 @@ body.is-head-dark .gh-live-ticker-time {
     
     .gh-live-ticker-headline {
         font-size: 1.2rem;
+    }
+
+    .gh-live-news-btn {
+        font-size: 1rem;
+        padding: 4px 8px;
+        margin-left: 8px;
     }
 }
 
@@ -1207,63 +1231,4 @@ body:has(.gh-live-ticker) .gh-cover {
     }
 }
 
-/* Daily News minimal styling to match other minimal sections */
-.gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-topic-content {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
 
-.gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card {
-    width: 100%;
-    max-width: 720px;
-}
-
-.gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-link {
-    display: block;
-    padding: 0;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    transition: opacity 0.2s ease;
-}
-
-.gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-link:hover {
-    background: transparent;
-    transform: none;
-    opacity: 0.8;
-}
-
-.gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-image {
-    display: none;
-}
-
-.gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-wrapper {
-    margin-top: 0;
-}
-
-.gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-title {
-    font-size: 1.6rem;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-    word-break: break-word;
-    margin-bottom: 0;
-    color: var(--color-primary-text);
-}
-
-.gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-excerpt {
-    display: none;
-}
-
-.gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-footer {
-    margin-top: 0;
-    font-size: 1.1rem;
-    color: var(--color-secondary-text);
-}
-
-@media (max-width: 767px) {
-    .gh-topic-grid:has(.gh-topic-name:contains("Daily News")) .gh-card-title {
-        font-size: 1.5rem;
-    }
-}
