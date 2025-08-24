@@ -1,0 +1,178 @@
+Of course. To elevate your live news banner to the standards of top publications like Bloomberg, you should replace the continuous horizontal scroll with a cleaner, more subtle fade transition between headlines. This improves readability and creates a more professional user experience.
+
+Pinning the banner to the top of the viewport and refining its typography and layout will also significantly enhance its UI.
+
+## 1. Modify the Ticker Structure (HTML)
+First, let's adjust the Handlebars template to better support the new animation style. We'll add a wrapper and a "active" class to the first item.
+
+File to Edit: aminearfa/theme-ii-daily/Theme-II-Daily-4e2b39fe7ed27ea5273afa1a6991c762b2b8994e/default.hbs
+
+Instructions:
+Replace the entire gh-live-ticker-track div with the following code. This fetches the 5 latest posts tagged with "live" and sets up the structure needed for the new JavaScript to cycle through them.
+
+Handlebars
+
+<div class="gh-live-ticker-track" id="liveTickerTrack">
+    {{#foreach posts}}
+        <a href="{{url}}" class="gh-live-ticker-item{{#if @first}} is-active{{/if}}">
+            <span class="gh-live-ticker-time">{{date format="HH:mm"}}</span>
+            <span class="gh-live-ticker-headline">{{title}}</span>
+        </a>
+    {{/foreach}}
+</div>
+## 2. Update the Ticker Style (CSS)
+Next, update your CSS to style the new banner. This code will make the banner sticky, remove the old scrolling animation, and add new styles for the fade transition.
+
+File to Edit: aminearfa/theme-ii-daily/Theme-II-Daily-4e2b39fe7ed27ea5273afa1a6991c762b2b8994e/assets/css/screen.css
+
+Instructions:
+Add the following CSS to the end of your screen.css file. It will override the existing ticker styles.
+
+CSS
+
+/* Live Ticker Styles */
+.gh-live-ticker {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #f8f8f8;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+body.is-head-dark .gh-live-ticker {
+    background: #1c1c1c;
+    border-bottom-color: #333;
+}
+
+.gh-live-ticker-container {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.gh-live-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #c92121;
+    color: var(--color-white);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-right: 16px;
+    padding: 5px 10px;
+}
+
+.gh-live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-white);
+    border-radius: 50%;
+    animation: livePulse 1.5s infinite;
+}
+
+@keyframes livePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.gh-live-ticker-content {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+
+.gh-live-ticker-track {
+    position: relative;
+    height: 100%;
+}
+
+.gh-live-ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: absolute;
+    inset: 0;
+    white-space: nowrap;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s;
+    visibility: hidden;
+}
+
+.gh-live-ticker-item.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.gh-live-ticker-time {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #888;
+}
+
+body.is-head-dark .gh-live-ticker-time {
+    color: #999;
+}
+
+.gh-live-ticker-headline {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--color-primary-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.is-head-dark .gh-live-ticker-headline {
+    color: #eee;
+}
+## 3. Implement the New Animation (JavaScript)
+Finally, replace the old JavaScript logic with a new function to handle the fading animation between headlines.
+
+File to Edit: aminearfa/theme-ii-daily/Theme-II-Daily-4e2b39fe7ed27ea5273afa1a6991c762b2b8994e/assets/js/main.js
+
+Instructions:
+Replace the entire existing "Live ticker functionality" block with this new code.
+
+JavaScript
+
+// Live ticker functionality
+(function() {
+    const tickerTrack = document.getElementById('liveTickerTrack');
+    const ticker = document.getElementById('liveTicker');
+    if (!tickerTrack) return;
+
+    const items = tickerTrack.querySelectorAll('.gh-live-ticker-item');
+    if (items.length <= 1) return;
+
+    let currentItem = 0;
+    let tickerInterval;
+
+    const cycleItems = () => {
+        items[currentItem].classList.remove('is-active');
+        currentItem = (currentItem + 1) % items.length;
+        items[currentItem].classList.add('is-active');
+    };
+
+    const startTicker = () => {
+        // Cycle every 5 seconds
+        tickerInterval = setInterval(cycleItems, 5000);
+    };
+
+    const stopTicker = () => {
+        clearInterval(tickerInterval);
+    };
+
+    ticker.addEventListener('mouseenter', stopTicker);
+    ticker.addEventListener('mouseleave', startTicker);
+
+    startTicker();
+})();
+After making these changes to the three files, your live news banner will function as a modern, sticky element with smooth fade transitions between headlines, closely mirroring the user experience of top news websites.
