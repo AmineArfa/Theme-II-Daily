@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const track = ticker.querySelector('.gh-live-ticker-track');
     if (!track) return;
 
-    let items = [];
-
     // Function to fetch latest posts from Ghost API
     async function fetchLatestPosts() {
         try {
@@ -78,70 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Refresh ticker content every 5 minutes
     setInterval(initializeTicker, 300000);
-});
-
-        // Show next item
-        currentIndex = (currentIndex + 1) % items.length;
-        const nextItem = track.children[currentIndex];
-        if (nextItem) {
-            nextItem.classList.add('is-active');
-        }
-    }
-
-    // Function to start the ticker
-    function startTicker() {
-        if (items.length <= 1) return;
-
-        intervalId = setInterval(showNextItem, 5000); // Change every 5 seconds
-    }
-
-    // Function to stop the ticker
-    function stopTicker() {
-        if (intervalId) {
-            clearInterval(intervalId);
-            intervalId = null;
-        }
-    }
-
-    // Initialize ticker
-    async function initTicker() {
-        items = await fetchLatestPosts();
-
-        if (items.length === 0) return;
-
-        // Clear existing items
-        track.innerHTML = '';
-
-        // Create new items
-        items.forEach((post, index) => {
-            const item = createTickerItem(post, index);
-            track.appendChild(item);
-        });
-
-        // Show first item
-        if (track.children.length > 0) {
-            track.children[0].classList.add('is-active');
-        }
-
-        // Start rotation if we have multiple items
-        if (items.length > 1) {
-            startTicker();
-        }
-    }
-
-    // Pause on hover
-    ticker.addEventListener('mouseenter', stopTicker);
-    ticker.addEventListener('mouseleave', () => {
-        if (items.length > 1) {
-            startTicker();
-        }
-    });
-
-    // Initialize
-    initTicker();
-
-    // Refresh every 5 minutes
-    setInterval(initTicker, 5 * 60 * 1000);
 });
 
 (function () {
