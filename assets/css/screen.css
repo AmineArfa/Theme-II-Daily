@@ -896,7 +896,7 @@ body.is-head-dark .gh-live-ticker-time {
 
     .gh-live-ticker-headline {
         font-size: 1rem !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
     }
 
     .gh-live-news-link {
@@ -941,7 +941,7 @@ body:has(.gh-live-ticker) .gh-cover {
 
     .gh-live-ticker-headline {
         font-size: 1rem !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
     }
 
     .gh-live-ticker-item {
