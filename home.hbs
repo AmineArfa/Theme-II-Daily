@@ -13,7 +13,6 @@
 
         <div class="gh-article-grid">
             {{#foreach posts}}
-                {{!-- The first post will be a featured hero --}}
                 {{#if @first}}
                     <article class="gh-article gh-article-featured {{post_class}}">
                         <a href="{{url}}" class="gh-article-link">
@@ -38,13 +37,19 @@
                                 <div class="gh-article-excerpt">
                                     <p>{{excerpt}}</p>
                                 </div>
+                                <div class="gh-article-meta">
+                                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+                                    {{#if reading_time}}
+                                        <span class="gh-article-meta-sep">•</span>
+                                        <span>{{reading_time}}</span>
+                                    {{/if}}
+                                </div>
                             </div>
                         </a>
                     </article>
                 {{else}}
-                    {{!-- All other posts will be in a standard card format --}}
                     <article class="gh-article {{post_class}}">
-                         <a href="{{url}}" class="gh-article-link">
+                        <a href="{{url}}" class="gh-article-link">
                             {{#if feature_image}}
                                 <img class="gh-article-image"
                                     srcset="{{img_url feature_image size="s"}} 300w,
@@ -57,11 +62,21 @@
                             {{/if}}
                             <div class="gh-article-content">
                                 <header class="gh-article-header">
-                                     {{#primary_tag}}
+                                    {{#primary_tag}}
                                         <span class="gh-article-tag">{{name}}</span>
                                     {{/primary_tag}}
                                     <h3 class="gh-article-title">{{title}}</h3>
                                 </header>
+                                <div class="gh-article-excerpt">
+                                    <p>{{excerpt}}</p>
+                                </div>
+                                <div class="gh-article-meta">
+                                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+                                    {{#if reading_time}}
+                                        <span class="gh-article-meta-sep">•</span>
+                                        <span>{{reading_time}}</span>
+                                    {{/if}}
+                                </div>
                             </div>
                         </a>
                     </article>
@@ -70,6 +85,5 @@
         </div>
 
         {{pagination}}
-
     </div>
 </main>
