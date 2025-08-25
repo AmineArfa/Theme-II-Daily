@@ -25,13 +25,15 @@
         <div class="gh-live-banner gh-live-banner-mobile">
             <div class="gh-live-banner-header">
                 <h2 class="gh-live-banner-title">
-                    <span class="gh-live-indicator">
-                        <span class="gh-live-dot"></span>
-                        LIVE
-                    </span>
-                    Daily news
+                    <div class="gh-live-banner-title-content">
+                        <span class="gh-live-indicator">
+                            <span class="gh-live-dot"></span>
+                            LIVE
+                        </span>
+                        Daily news
+                    </div>
+                    <a href="/tag/live" class="gh-live-banner-see-more">see more →</a>
                 </h2>
-                <a href="/tag/live" class="gh-live-banner-see-more">see more →</a>
             </div>
             <div class="gh-live-banner-content">
                 {{#get "posts" filter="tag:live" limit="8" include="authors"}}
@@ -113,13 +115,15 @@
             <aside class="gh-live-banner gh-live-banner-desktop">
                 <div class="gh-live-banner-header">
                     <h2 class="gh-live-banner-title">
-                        <span class="gh-live-indicator">
-                            <span class="gh-live-dot"></span>
-                            LIVE
-                        </span>
-                        Daily news
+                        <div class="gh-live-banner-title-content">
+                            <span class="gh-live-indicator">
+                                <span class="gh-live-dot"></span>
+                                LIVE
+                            </span>
+                            Daily news
+                        </div>
+                        <a href="/tag/live" class="gh-live-banner-see-more">see more →</a>
                     </h2>
-                    <a href="/tag/live" class="gh-live-banner-see-more">see more →</a>
                 </div>
                 <div class="gh-live-banner-content">
                     {{#get "posts" filter="tag:live" limit="10" include="authors"}}
