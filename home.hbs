@@ -1,3 +1,4 @@
+
 {{!< default}}
 
 {{#contentFor "head"}}
@@ -18,12 +19,14 @@
                 <div class="gh-topic-grid">
                     <h2 class="gh-topic-name">Latest Posts</h2>
 
-                    <div class="gh-postfeed">
+                    <div class="gh-topic-content">
                         {{#foreach posts}}
                             {{> "loop-grid"}}
                         {{/foreach}}
                     </div>
                 </div>
+
+                {{pagination}}
             {{/if}}
 
         </div>

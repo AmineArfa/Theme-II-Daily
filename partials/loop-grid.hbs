@@ -1,40 +1,34 @@
-<article class="gh-card {{post_class}}{{#match has_large_post "!=" false}}{{#has index="0"}} large{{/has}}{{/match}}">
+
+<article class="gh-card {{post_class}}{{#if feature_image}} {{else}} no-image{{/if}}{{#match @index "0"}} large{{/match}}{{#is featured}} featured{{/is}}">
     <a class="gh-card-link" href="{{url}}">
         {{#if feature_image}}
-            <figure class="gh-card-image">
+            <div class="gh-card-image">
                 <img
                     srcset="{{img_url feature_image size="s"}} 300w,
-                            {{img_url feature_image size="m"}} 720w,
-                            {{img_url feature_image size="l"}} 960w,
-                            {{img_url feature_image size="xl"}} 1200w,
-                            {{img_url feature_image size="xxl"}} 2000w"
-                    sizes="(max-width: 1200px) 100vw, 1200px"
+                            {{img_url feature_image size="m"}} 600w,
+                            {{img_url feature_image size="l"}} 1000w,
+                            {{img_url feature_image size="xl"}} 2000w"
+                    sizes="(max-width: 1000px) 400px, 700px"
                     src="{{img_url feature_image size="m"}}"
                     alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                    loading="lazy"
                 >
-            </figure>
+            </div>
         {{/if}}
-
         <div class="gh-card-wrapper">
             <header class="gh-card-header">
+                {{#primary_tag}}
+                    <span class="gh-card-tag">{{name}}</span>
+                {{/primary_tag}}
                 <h3 class="gh-card-title">{{title}}</h3>
             </header>
-
-            {{#if excerpt}}
-                {{#is "home"}}
-                    {{#has index="0"}}
-                        <div class="gh-card-excerpt">{{excerpt}}</div>
-                    {{/has}}
-                {{else}}
-                    <div class="gh-card-excerpt">{{excerpt}}</div>
-                {{/is}}
-            {{/if}}
-
+            <div class="gh-card-excerpt">
+                <p>{{excerpt}}</p>
+            </div>
             <footer class="gh-card-footer">
-                <span class="gh-card-author">{{#foreach authors}}{{#if @first}}{{name}}{{else}}, {{name}}{{/if}}{{/foreach}}</span>
-                <time class="gh-card-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
-                {{#if @site.comments_enabled}}
-                    {{comment_count class="gh-card-comments"}}
+                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+                {{#if reading_time}}
+                    <span>{{reading_time}}</span>
                 {{/if}}
             </footer>
         </div>

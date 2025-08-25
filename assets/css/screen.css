@@ -235,7 +235,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     max-width: 720px;
 }
 
-.gh-topic-grid .gh-card:not(.large) .gh-card-excerpt {
+.gh-card:not(.large) .gh-card-excerpt {
     display: -webkit-box;
     margin-top: 4px;
     overflow-y: hidden;
@@ -748,7 +748,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 .gh-subscribe ~ .gh-copyright {
     margin-top: 64px;
 }
-
 
 
 /* Live Ticker Mobile Styles */
