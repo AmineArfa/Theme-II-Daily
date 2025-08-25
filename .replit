@@ -5,3 +5,15 @@ channel = "stable-25_05"
 [[ports]]
 localPort = 35729
 externalPort = 80
+
+[workflows]
+runButton = "Development"
+
+[[workflows.workflow]]
+name = "Development"
+author = 45752525
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
