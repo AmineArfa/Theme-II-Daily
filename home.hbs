@@ -3,7 +3,25 @@
 <main class="gh-main gh-outer">
     <div class="gh-inner">
         
-        {{! Live Banner - Mobile/Tablet position }}
+        <div class="gh-main-content-wrapper">
+            <div class="gh-main-content">
+                <section class="gh-topic gh-topic-grid" style="margin-top: 20px;">
+            <div class="gh-topic-content">
+                {{#get "posts" filter="tag:-live" limit="7"}}
+                    {{#foreach posts}}
+                        {{> "loop-grid"}}
+                    {{/foreach}}
+                {{/get}}
+            </div>
+
+            <footer class="gh-topic-footer">
+                {{#match pagination.pages ">" 1}}
+                    <a class="gh-topic-link" href="{{@site.url}}/page/2">Show more {{> "icons/arrow"}}</a>
+                {{/match}}
+            </footer>
+        </section>
+
+        {{! Live Banner - Mobile/Tablet position - Moved below first article section }}
         <div class="gh-live-banner gh-live-banner-mobile">
             <div class="gh-live-banner-header">
                 <h2 class="gh-live-banner-title">
@@ -47,24 +65,6 @@
                 {{/get}}
             </div>
         </div>
-
-        <div class="gh-main-content-wrapper">
-            <div class="gh-main-content">
-                <section class="gh-topic gh-topic-grid" style="margin-top: 20px;">
-            <div class="gh-topic-content">
-                {{#get "posts" filter="tag:-live" limit="7"}}
-                    {{#foreach posts}}
-                        {{> "loop-grid"}}
-                    {{/foreach}}
-                {{/get}}
-            </div>
-
-            <footer class="gh-topic-footer">
-                {{#match pagination.pages ">" 1}}
-                    <a class="gh-topic-link" href="{{@site.url}}/page/2">Show more {{> "icons/arrow"}}</a>
-                {{/match}}
-            </footer>
-        </section>
 
         {{#if @custom.enter_tag_slugs_for_primary_sections}}
             {{#get "tags" filter="slug:[{{@custom.enter_tag_slugs_for_primary_sections}}]"}}
