@@ -1199,3 +1199,11 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         line-height: 1;
     }
 }
+
+/* Fix for vertical topic titles on mobile */
+@media (max-width: 767px) {
+    .gh-topic-name {
+        writing-mode: initial !important; /* Resets to default horizontal writing */
+        text-orientation: mixed !important; /* Ensures proper orientation */
+    }
+}
