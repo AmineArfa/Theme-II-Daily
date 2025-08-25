@@ -3,80 +3,70 @@
 })();
 
 // Live ticker functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const ticker = document.querySelector('.gh-live-ticker');
     if (!ticker) return;
 
-    const track = ticker.querySelector('.gh-live-ticker-track');
-    if (!track) return;
+    const tickerTrack = document.getElementById('liveTickerTrack');
+    if (!tickerTrack) return;
 
-    // Function to fetch latest posts from Ghost API
-    async function fetchLatestPosts() {
+    let items = tickerTrack.querySelectorAll('.gh-live-ticker-item');
+    if (items.length <= 1) return;
+
+    let currentItem = 0;
+    let tickerInterval;
+
+    const cycleItems = () => {
+        items[currentItem].classList.remove('is-active');
+        currentItem = (currentItem + 1) % items.length;
+        items[currentItem].classList.add('is-active');
+    };
+
+    const startTicker = () => {
+        // Stop any existing interval to prevent duplicates
+        clearInterval(tickerInterval);
+        // Cycle every 5 seconds
+        tickerInterval = setInterval(cycleItems, 5000);
+    };
+
+    const stopTicker = () => {
+        clearInterval(tickerInterval);
+    };
+
+    const initializeTicker = async () => {
         try {
-            // Fetch posts with "live" tag for breaking news
-            const response = await fetch('/ghost/api/v3/content/posts/?key=' + (window.ghostAPIKey || '') + '&filter=tag:live&limit=10&fields=title,published_at,url,excerpt&order=published_at%20desc');
+            const response = await fetch('/ghost/api/v3/content/posts/?key=' + (window.ghostAPIKey || '') + '&filter=tag:live&limit=10&fields=title,published_at,url&order=published_at%20desc');
             const data = await response.json();
 
             if (data.posts && data.posts.length > 0) {
-                return data.posts.map(post => ({
-                    title: post.title,
-                    time: new Date(post.published_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
-                    url: post.url,
-                    excerpt: post.excerpt
-                }));
+                tickerTrack.innerHTML = data.posts.map((post, index) => `
+                    <a href="${post.url}" class="gh-live-ticker-item${index === 0 ? ' is-active' : ''}">
+                        <span class="gh-live-ticker-time">${new Date(post.published_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        <h3 class="gh-live-ticker-headline">${post.title}</h3>
+                    </a>
+                `).join('');
+
+                // Re-select items after updating HTML
+                items = tickerTrack.querySelectorAll('.gh-live-ticker-item');
+                if (items.length > 1) {
+                    currentItem = 0;
+                    startTicker();
+                }
+            } else {
+                ticker.style.display = 'none'; // Hide ticker if no live posts
             }
         } catch (error) {
-            console.log('Could not fetch live posts:', error);
+            console.error('Could not fetch live posts:', error);
+            ticker.style.display = 'none'; // Hide ticker on API error
         }
+    };
 
-        // Fallback to existing items if API fails
-        return Array.from(document.querySelectorAll('.gh-live-ticker-item')).map(item => {
-            const time = item.querySelector('.gh-live-ticker-time');
-            const title = item.querySelector('.gh-live-ticker-headline');
-            const link = item.querySelector('.gh-live-ticker-link');
-            return {
-                title: title ? title.textContent : '',
-                time: time ? time.textContent : new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
-                url: link ? link.href : '/',
-                excerpt: ''
-            };
-        });
-    }
+    ticker.addEventListener('mouseenter', stopTicker);
+    ticker.addEventListener('mouseleave', startTicker);
 
-    // Function to create continuous scrolling content
-    function createScrollingContent(posts) {
-        if (posts.length === 0) return;
-
-        // Clear existing content
-        track.innerHTML = '';
-
-        // Create a continuous string of all breaking news items with proper spacing and links
-        const newsItems = posts.map(post => 
-            `<a href="${post.url}" class="gh-live-ticker-link"><span class="gh-live-ticker-time">${post.time}</span> <h3 class="gh-live-ticker-headline">${post.title}</h3></a>`
-        ).join(' • ');
-
-        // Create the scrolling item with seamless looping
-        const item = document.createElement('div');
-        item.className = 'gh-live-ticker-item';
-        // Create seamless loop by duplicating content
-        item.innerHTML = newsItems + ' • ' + newsItems;
-
-        track.appendChild(item);
-    }
-
-    // Initialize the horizontal scrolling ticker
-    async function initializeTicker() {
-        const posts = await fetchLatestPosts();
-        if (posts && posts.length > 0) {
-            createScrollingContent(posts);
-        }
-    }
-
-    // Start the ticker
+    // Initial load and set refresh interval
     initializeTicker();
-
-    // Refresh ticker content every 5 minutes
-    setInterval(initializeTicker, 300000);
+    setInterval(initializeTicker, 300000); // Refresh every 5 minutes
 });
 
 // Live Banner Auto-refresh functionality

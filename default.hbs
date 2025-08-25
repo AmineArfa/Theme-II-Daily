@@ -78,10 +78,10 @@
                     <div class="gh-live-ticker-content">
                         <div class="gh-live-ticker-track" id="liveTickerTrack">
                             {{#foreach posts}}
-                                <div class="gh-live-ticker-item{{#if @first}} is-active{{/if}}">
+                                <a href="{{url}}" class="gh-live-ticker-item{{#if @first}} is-active{{/if}}">
                                     <span class="gh-live-ticker-time">{{date format="HH:mm"}}</span>
-                                    <span class="gh-live-ticker-headline">{{title}}</span>
-                                </div>
+                                    <h3 class="gh-live-ticker-headline">{{title}}</h3>
+                                </a>
                             {{/foreach}}
                         </div>
                     </div>
