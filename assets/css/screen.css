@@ -66,6 +66,25 @@ body:is(.is-head-transparent, .is-head-brand, .is-head-dark) .gh-head-logo img +
     letter-spacing: -0.01em;
 }
 
+.gh-postfeed {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.4rem;
+    margin-bottom: 4.8rem;
+}
+
+@media (max-width: 767px) {
+    .gh-postfeed {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+    
+    .gh-topic-grid .gh-topic-name {
+        font-size: 2rem;
+        margin-bottom: 2.4rem;
+    }
+}
+
 .gh-topic-grid .gh-topic-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
