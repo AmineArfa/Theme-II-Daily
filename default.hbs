@@ -67,29 +67,7 @@
         </div>
     </header>
 
-    {{#get "posts" filter="tag:live" limit="5"}}
-        {{#if posts}}
-            <div class="gh-live-ticker">
-                <div class="gh-live-ticker-container">
-                    <div class="gh-live-badge">
-                        <span class="gh-live-dot"></span>
-                        LIVE
-                    </div>
-                    <div class="gh-live-ticker-content">
-                        <div class="gh-live-ticker-track" id="liveTickerTrack">
-                            {{#foreach posts}}
-                                <a href="{{url}}" class="gh-live-ticker-item{{#if @first}} is-active{{/if}}">
-                                    <span class="gh-live-ticker-time">{{date format="HH:mm"}}</span>
-                                    <h3 class="gh-live-ticker-headline">{{title}}</h3>
-                                </a>
-                            {{/foreach}}
-                        </div>
-                    </div>
-                    <a href="{{@site.url}}/tag/live/" class="gh-live-news-link">See more →</a>
-                </div>
-            </div>
-        {{/if}}
-    {{/get}}
+    
 
     <div class="gh-main-container">
         <div class="gh-content-wrapper">
