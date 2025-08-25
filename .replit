@@ -2,10 +2,6 @@ modules = ["nodejs-20"]
 [nix]
 channel = "stable-25_05"
 
-[[ports]]
-localPort = 35729
-externalPort = 80
-
 [workflows]
 runButton = "Development"
 
@@ -26,3 +22,7 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
+
+[[ports]]
+localPort = 35729
+externalPort = 80
