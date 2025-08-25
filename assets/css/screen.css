@@ -836,44 +836,20 @@ body.is-head-dark .gh-live-ticker {
 }
 
 .gh-live-ticker-time {
-    font-size: 1.1rem !important;
-    font-weight: 500 !important;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: var(--ghost-accent-color);
     flex-shrink: 0;
 }
 
 .gh-live-ticker-headline {
-    font-size: 1.1rem !important;
-    font-weight: 500 !important;
-    line-height: 1.2;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--color-primary-text);
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
     margin: 0;
     padding: 0;
-    display: inline;
-}
-
-.gh-live-ticker-link {
-    color: inherit !important;
-    text-decoration: none !important;
-    transition: color 0.2s ease !important;
-}
-
-.gh-live-ticker-link:hover {
-    color: var(--ghost-accent-color) !important;
-}
-
-.gh-live-ticker-item {
-    display: inline-block !important;
-    white-space: nowrap !important;
-    animation: scrollLeft 60s linear infinite !important;
-    color: inherit !important;
-    padding-left: 100% !important;
-}
-
-.gh-live-ticker-item:hover {
-    animation-play-state: running !important;
 }
 
 body.is-head-dark .gh-live-ticker-item {
@@ -884,11 +860,15 @@ body.is-head-dark .gh-live-ticker-time {
     color: var(--ghost-accent-color);
 }
 
+body.is-head-dark .gh-live-ticker-headline {
+    color: #eee;
+}
+
 /* Responsive adjustments */
 @media (max-width: 767px) {
     .gh-live-ticker-container {
         padding: 0 16px;
-        height: 40px;
+        height: 44px;
     }
 
     .gh-live-badge {
@@ -897,17 +877,33 @@ body.is-head-dark .gh-live-ticker-time {
         margin-right: 12px;
     }
 
+    .gh-live-dot {
+        width: 6px;
+        height: 6px;
+    }
+
     .gh-live-ticker-time {
         font-size: 1rem;
+        font-weight: 500;
+        padding: 1px 6px;
     }
 
     .gh-live-ticker-headline {
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
-        font-family: var(--font-sans) !important;
-        display: inline !important;
-        margin: 0 !important;
-        padding: 0 !important;
+        font-size: 1.1rem;
+        font-weight: 600;
+        font-family: var(--font-sans);
+        display: inline;
+        margin: 0;
+        padding: 0;
+    }
+
+    .gh-live-ticker-item {
+        margin-right: 32px;
+    }
+
+    body:has(.gh-live-ticker) .gh-cover {
+        margin-top: -44px;
+        padding-top: calc(6.4rem + 44px);
     }
 
     .gh-live-news-link {
