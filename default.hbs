@@ -95,23 +95,6 @@
         <div class="gh-content-wrapper">
             {{{body}}}
         </div>
-
-        {{#unless @member}}
-        {{#is "home, index"}}
-        <aside class="gh-live-sidebar" style="margin-top: 0; padding-top: 0;">
-            <div class="gh-live-header">
-                <h3 class="gh-live-title">Articles</h3>
-            </div>
-            <div class="gh-live-content">
-                {{#get "posts" limit="5" include="authors"}}
-                    {{#foreach posts}}
-                        {{> "loop-minimal-live"}}
-                    {{/foreach}}
-                {{/get}}
-            </div>
-        </aside>
-        {{/is}}
-        {{/unless}}
     </div>
 
     <footer class="gh-foot gh-outer">
