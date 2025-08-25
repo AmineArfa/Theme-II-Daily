@@ -923,6 +923,9 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     background: linear-gradient(135deg, #c92121 0%, #d63232 100%);
     padding: 16px 20px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .gh-live-banner-title {
@@ -933,6 +936,20 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.gh-live-banner-see-more {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+.gh-live-banner-see-more:hover {
+    opacity: 1;
+    text-decoration: underline;
 }
 
 .gh-live-indicator {
@@ -963,6 +980,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 .gh-live-banner-content {
     max-height: 600px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .gh-live-banner-item {
@@ -1065,6 +1083,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     .gh-live-indicator {
         font-size: 1rem;
         padding: 3px 10px;
+    }
+
+    .gh-live-banner-see-more {
+        font-size: 1.1rem;
     }
 
     .gh-live-banner-link {
