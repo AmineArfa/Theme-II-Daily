@@ -1,0 +1,57 @@
+Please remove the unwanted horizontal scrollbar appearing in the "Daily News" component on the homepage. The component is designed to show a list of articles, but it is currently overflowing its container, creating a bad user experience.
+
+1. The Problem
+A horizontal scrollbar is visible on the "Daily News" section, as shown in the attached screenshot. This happens because the container holding the article cards is wider than the viewport.
+
+2. Technical Analysis
+The issue originates from the combination of CSS Flexbox properties and white-space rules applied to the article list.
+
+File to Edit: assets/css/screen.css
+
+Problematic CSS Rule: Inside the .gh-topic-content class, the white-space: nowrap; property is preventing the article cards from wrapping to the next line. This, combined with the overflow-x: auto; on the same element, forces the scrollbar to appear.
+
+3. Implementation Steps
+To fix this, we need to adjust the CSS to allow the items to wrap naturally while hiding any minor overflow.
+
+Instructions:
+
+Navigate to the assets/css/screen.css file.
+
+Locate the .gh-topic-content CSS selector.
+
+Modify the properties as follows:
+
+Change white-space: nowrap; to white-space: normal; to allow items to wrap.
+
+Change overflow-x: auto; to overflow-x: hidden; to ensure no scrollbar appears if there's any residual overflow during rendering.
+
+Here is the code to update:
+
+CSS
+
+/* Find this existing rule */
+.gh-topic-content {
+    display: flex;
+    gap: 32px;
+    margin: 0 -24px;
+    padding: 4px 24px;
+    overflow-x: auto; /* Change this */
+    scroll-behavior: smooth;
+    white-space: nowrap; /* And change this */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* And change it to this: */
+.gh-topic-content {
+    display: flex;
+    gap: 32px;
+    margin: 0 -24px;
+    padding: 4px 24px;
+    overflow-x: hidden; /* UPDATED */
+    scroll-behavior: smooth;
+    white-space: normal; /* UPDATED */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+This change will make the article cards wrap to the next line as intended and will completely remove the horizontal scrollbar.
