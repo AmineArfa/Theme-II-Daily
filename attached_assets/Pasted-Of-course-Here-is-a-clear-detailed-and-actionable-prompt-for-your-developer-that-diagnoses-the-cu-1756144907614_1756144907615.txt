@@ -1,0 +1,242 @@
+Of course. Here is a clear, detailed, and actionable prompt for your developer that diagnoses the current issues and provides a step-by-step guide to implementing a modern, robust solution.
+
+Subject: Refactor Live News Ticker for Improved UX and Bug Fixes
+Hello,
+
+This task is to refactor the live news ticker located under the header. The current implementation is buggy and uses a dated horizontal scrolling effect. The goal is to fix the bugs and upgrade the user experience to match modern standards, such as those seen on major news sites.
+
+1. Problem Analysis
+The current ticker has two main issues:
+
+Buggy Display & Gaps: As seen in this screenshot, the ticker sometimes shows blank gaps or only timestamps without headlines.
+
+Cause: The assets/js/main.js file uses a CSS animation (@keyframes scrollLeft) that scrolls a long, continuous line of text. This text is created by duplicating the list of headlines. If the fetched headlines aren't wide enough to fill the container twice, a visible gap appears before the animation loops. The issue with missing headlines likely stems from the API fetch failing and the fallback logic not handling the empty state correctly.
+
+Poor User Experience: The continuous horizontal scrolling (marquee) effect is difficult to read and outdated. Modern news sites use more subtle transitions that allow users to read headlines comfortably.
+
+2. Proposed Solution
+We will replace the marquee effect with a fade-in/fade-out transition that cycles through one headline at a time. This is more professional, easier to read, and more robust.
+
+Animation: Each headline will fade into view, remain for a few seconds, and then fade out, being replaced by the next headline.
+
+Interactivity: The animation will pause when the user hovers their mouse over the ticker and resume when they move it away.
+
+Data Handling: The JavaScript will be updated to handle API data more gracefully and build the new animation structure.
+
+3. Detailed Implementation Steps
+Step 1: Modify the HTML Structure (default.hbs)
+The current structure is built for a continuous scroll. We need to adjust it so each news item is a distinct element that can be toggled.
+
+File to Edit: default.hbs
+
+Instructions:
+Replace the current gh-live-ticker-track div (lines 201-207) with the following. This new structure creates a separate link for each post and adds an is-active class to the first item, which our CSS and JS will use.
+
+Handlebars
+
+<div class="gh-live-ticker-content">
+    <div class="gh-live-ticker-track" id="liveTickerTrack">
+        {{#foreach posts}}
+            <a href="{{url}}" class="gh-live-ticker-item{{#if @first}} is-active{{/if}}">
+                <span class="gh-live-ticker-time">{{date format="HH:mm"}}</span>
+                <h3 class="gh-live-ticker-headline">{{title}}</h3>
+            </a>
+        {{/foreach}}
+    </div>
+</div>
+Step 2: Update the CSS (screen.css)
+Update the styles to remove the old scrolling animation and add new rules for the fade transition.
+
+File to Edit: assets/css/screen.css
+
+Instructions:
+Find the "Live Ticker Styles" section and replace it entirely with the CSS below.
+
+CSS
+
+/* Live Ticker Styles */
+.gh-live-ticker {
+    position: sticky;
+    top: 0;
+    z-index: 100; /* Increased z-index to ensure it stays on top */
+    background: #f8f8f8;
+    border-bottom: 1px solid #e5e5e5;
+    font-family: var(--font-sans);
+}
+
+body.is-head-dark .gh-live-ticker {
+    background: #1c1c1c;
+    border-bottom-color: #333;
+}
+
+.gh-live-ticker-container {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.gh-live-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #c92121;
+    color: var(--color-white);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-right: 16px;
+    padding: 5px 10px;
+}
+
+.gh-live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-white);
+    border-radius: 50%;
+    animation: livePulse 1.5s infinite;
+}
+
+@keyframes livePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.gh-live-ticker-content {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+
+.gh-live-ticker-track {
+    position: relative;
+    height: 100%;
+}
+
+.gh-live-ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: absolute;
+    inset: 0;
+    white-space: nowrap;
+    text-decoration: none;
+    color: inherit;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    visibility: hidden;
+}
+
+.gh-live-ticker-item.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.gh-live-ticker-item:hover {
+    color: var(--ghost-accent-color);
+}
+
+.gh-live-ticker-time {
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    color: var(--ghost-accent-color);
+    flex-shrink: 0;
+}
+
+.gh-live-ticker-headline {
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0; /* Reset margin for h3 */
+    padding: 0; /* Reset padding for h3 */
+    display: inline; /* Keep it in line with the time */
+}
+
+body.is-head-dark .gh-live-ticker-headline {
+    color: #fff;
+}
+Step 3: Update the JavaScript Logic (main.js)
+Replace the existing ticker logic with a new function that cycles through items by toggling the .is-active class. This removes the need to manually build and duplicate the HTML string.
+
+File to Edit: assets/js/main.js
+
+Instructions:
+Replace the entire "Live ticker functionality" block with this new, improved code.
+
+JavaScript
+
+// Live ticker functionality
+document.addEventListener('DOMContentLoaded', function () {
+    const ticker = document.querySelector('.gh-live-ticker');
+    if (!ticker) return;
+
+    const tickerTrack = document.getElementById('liveTickerTrack');
+    if (!tickerTrack) return;
+
+    let items = tickerTrack.querySelectorAll('.gh-live-ticker-item');
+    if (items.length <= 1) return;
+
+    let currentItem = 0;
+    let tickerInterval;
+
+    const cycleItems = () => {
+        items[currentItem].classList.remove('is-active');
+        currentItem = (currentItem + 1) % items.length;
+        items[currentItem].classList.add('is-active');
+    };
+
+    const startTicker = () => {
+        // Stop any existing interval to prevent duplicates
+        clearInterval(tickerInterval);
+        // Cycle every 5 seconds
+        tickerInterval = setInterval(cycleItems, 5000);
+    };
+
+    const stopTicker = () => {
+        clearInterval(tickerInterval);
+    };
+
+    const initializeTicker = async () => {
+        try {
+            const response = await fetch('/ghost/api/v3/content/posts/?key=' + (window.ghostAPIKey || '') + '&filter=tag:live&limit=10&fields=title,published_at,url&order=published_at%20desc');
+            const data = await response.json();
+
+            if (data.posts && data.posts.length > 0) {
+                tickerTrack.innerHTML = data.posts.map((post, index) => `
+                    <a href="${post.url}" class="gh-live-ticker-item${index === 0 ? ' is-active' : ''}">
+                        <span class="gh-live-ticker-time">${new Date(post.published_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        <h3 class="gh-live-ticker-headline">${post.title}</h3>
+                    </a>
+                `).join('');
+
+                // Re-select items after updating HTML
+                items = tickerTrack.querySelectorAll('.gh-live-ticker-item');
+                if (items.length > 1) {
+                    currentItem = 0;
+                    startTicker();
+                }
+            } else {
+                ticker.style.display = 'none'; // Hide ticker if no live posts
+            }
+        } catch (error) {
+            console.error('Could not fetch live posts:', error);
+            ticker.style.display = 'none'; // Hide ticker on API error
+        }
+    };
+
+    ticker.addEventListener('mouseenter', stopTicker);
+    ticker.addEventListener('mouseleave', startTicker);
+
+    // Initial load and set refresh interval
+    initializeTicker();
+    setInterval(initializeTicker, 300000); // Refresh every 5 minutes
+});
